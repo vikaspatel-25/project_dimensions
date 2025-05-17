@@ -240,5 +240,8 @@ body {
     width: 80%;
    min-width: 87vw;
   }
+  .area-unit{
+    font-size: 16px;
+  }
 
 }
