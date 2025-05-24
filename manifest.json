@@ -2,7 +2,7 @@
   "name": "Dimensions",
   "short_name": "Dimensions",
   "description": "Personalised Calculator",
-  "start_url": "./index.html",
+  "start_url": "https://vikaspatel-25.github.io/project_dimensions/",
   "display": "standalone",
   "background_color": "#0c0f14",
   "theme_color": "#0c0f14",
