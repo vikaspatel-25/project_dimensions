@@ -9,6 +9,46 @@ unitDropDownBox.addEventListener('change', (e) => {
 });
 
 
+//handleTab Switching
+
+function handleTabSwitch(tab){
+    if(tab == 'tab1'){
+        document.getElementById('lengthSol').style.display = 'none';
+        document.getElementById('areaForm').style.display = 'block';
+        document.getElementById('lengthForm').style.display = 'none';
+        document.getElementById('areaSol').style.display = 'block';
+    }
+    if(tab == 'tab2'){
+        document.getElementById('areaForm').style.display = 'none';
+        document.getElementById('areaSol').style.display = 'none';
+        document.getElementById('lengthSol').style.display = 'block';
+        document.getElementById('lengthForm').style.display = 'flex';
+        
+    }
+}
+
+
+function handleTabClick(event) {
+let allTabs = Array.from(document.getElementsByClassName('n-tab'));
+
+// reset the styles for all tabs
+allTabs.forEach(tab => {
+tab.style.backgroundColor = '#0F0B18';
+tab.style.color = '#FFFFFF';
+
+});
+
+// retrieve the clicked tab and set its styles
+let tabClicked = event.target;
+tabClicked.style.backgroundColor = '#FFFFFF';
+tabClicked.style.color = '#000000';
+
+let tabClickedId = event.target.getAttribute('id');
+ return handleTabSwitch(tabClickedId);
+};
+
+
+
 //making the drop downs functional by appending that number of input fields in that section
 let numberDropDownLists = document.getElementsByClassName('number-drop');
 
@@ -85,6 +125,56 @@ Array.from(numberDropDownLists).forEach(element => {
                     <div class="input-row win-rows windows-dimensions" id="window-${i + 1}" style="display: ${displayStyle};"> <div>${i + 1}</div>
                         <input type="number" min="0" id="winh${i + 1}" value="${winh1Value}" class="input-box win-height" placeholder="Height" ${onInputAttr} >
                         <input type="number" min="0" id="winw${i + 1}" value="${winw1Value}" class="input-box win-width" placeholder="Width" ${onInputAttr} >
+                    </div>
+                `;
+            }
+        
+            windowInputRowContainer.innerHTML = htmlString;
+        }
+        
+         if(listId == 'gatesNumL'){
+
+                let gatesInputRowContainer = document.getElementById('gatesInputRowL');
+                let number = e.target.value;
+                let gh1LValue = document.getElementById('gh1L').value;
+                let gw1LValue = document.getElementById('gw1L').value;
+
+                gatesInputRowContainer.innerHTML = '';
+            
+                let htmlString = '';
+            
+                for (let i = 0; i < number; i++) {
+                    let displayStyle = i === 0 ? 'flex' : 'none';
+                    let onInputAttr = i === 0 ? `oninput="handleDisable('gateL')"` : '';
+
+                    htmlString += `
+                        <div class="input-row gate-rowsL gates-dimensionsL" id="gate_${i+1}"style="display: ${displayStyle};"><div>${i+1}</div>
+                            <input type="number" min="0" id="gh${i + 1}L" value="${gh1LValue}" class="input-box gate-height" placeholder="Height" ${onInputAttr}>
+                            <input type="number" min="0" id="gw${i + 1}L" value="${gw1LValue}" class="input-box gate-width" placeholder="Width" ${onInputAttr}>
+                        </div>
+                    `;
+                }
+            
+                gatesInputRowContainer.innerHTML = htmlString;
+        }
+
+        if (listId == 'windowsNumL') {
+            let windowInputRowContainer = document.getElementById('windowInputRowL');
+            let number = e.target.value;
+            let winh1LValue = document.getElementById('winh1L').value;
+            let winw1LValue = document.getElementById('winw1L').value;
+            windowInputRowContainer.innerHTML = '';
+        
+            let htmlString = '';
+        
+            for (let i = 0; i < number; i++) {
+                let displayStyle = i === 0 ? 'flex' : 'none';
+                let onInputAttr = i === 0 ? `oninput="handleDisable('winL')"` : '';
+
+                htmlString += `
+                    <div class="input-row win-rowsL windows-dimensionsL" id="window_${i + 1}" style="display: ${displayStyle};"> <div>${i + 1}</div>
+                        <input type="number" min="0" id="winh${i + 1}L" value="${winh1LValue}" class="input-box win-height" placeholder="Height" ${onInputAttr} >
+                        <input type="number" min="0" id="winw${i + 1}L" value="${winw1LValue}" class="input-box win-width" placeholder="Width" ${onInputAttr} >
                     </div>
                 `;
             }
@@ -207,6 +297,76 @@ Array.from(expandButtons).forEach(element =>{
         }
         
     }
+    if(expandId == 'gateDropL'){
+        let gateDropButton = document.getElementById('gateDropL');
+
+        if(gateDropButton.innerText == 'View All' ){
+           gateDropButton.innerText = 'Close All';
+
+           let gateRows = document.getElementsByClassName('gate-rowsL');
+
+           Array.from(gateRows).forEach((e,i)=>{
+            if(i==0);
+            else{
+               e.style.display = 'flex';  
+            }
+
+           })
+          
+        }
+
+        else if(gateDropButton.innerText == 'Close All'){
+            gateDropButton.innerText = 'View All';
+
+            let gateRows = document.getElementsByClassName('gate-rowsL');
+
+           Array.from(gateRows).forEach((e,i)=>{
+            if(i==0);
+            else{
+               e.style.display = 'none';  
+            }
+
+           })
+           
+        
+        }
+        
+    }
+
+    if(expandId == 'winDropL'){
+
+        let winDropButton = document.getElementById('winDropL');
+
+        if(winDropButton.innerText == 'View All' ){
+           winDropButton.innerText = 'Close All';
+
+           let winRows = document.getElementsByClassName('win-rowsL');
+
+           Array.from(winRows).forEach((e,i)=>{
+            if(i==0);
+            else{
+               e.style.display = 'flex';  
+            }
+
+           })
+        }
+
+        else if(winDropButton.innerText == 'Close All'){
+            winDropButton.innerText = 'View All';
+
+            let winRows = document.getElementsByClassName('win-rowsL');
+
+           Array.from(winRows).forEach((e,i)=>{
+            if(i==0);
+            else{
+               e.style.display = 'none';  
+            }
+
+           })
+        }
+        
+    }
+    
  })
 });
 
@@ -250,6 +410,30 @@ function handleDisable(type){
     }
  
 }
+
+   if(type == 'winL'){
+    let winh1L = document.getElementById('winh1L');
+    let winw1L = document.getElementById('winw1L');
+
+    if(winh1L.value && winw1L.value){
+        document.getElementById('windowsNumL').disabled = false;
+    }
+    else{
+        document.getElementById('windowsNumL').disabled = true;
+    }
+   }
+
+   if(type == 'gateL'){
+    let gh1L = document.getElementById('gh1L');
+    let gw1L = document.getElementById('gw1L');
+
+    if(gh1L.value && gw1L.value){
+        document.getElementById('gatesNumL').disabled = false;
+    }
+    else{
+        document.getElementById('gatesNumL').disabled = true;
+    }
+   }
 }
 
 // calculate button data collection function
@@ -299,8 +483,8 @@ function collectData(){
         })
 
         if(flag == 1){
-    flag=0;
-    return;
+        flag=0;
+        return;
         }
    
 
@@ -379,8 +563,163 @@ function collectData(){
 
 }
 
-//calculation functions
+let flag2 = 0;
+function collectDataL(){
 
+    function checkInvalidData(data){
+          if(data == '' || data < 0 || data == NaN) return true;
+          else false;
+    }
+       //data validation and collection for gates
+       let gateDimensionList = document.getElementsByClassName('gates-dimensionsL');
+
+       let gateDimensions = [];
+
+       Array.from(gateDimensionList).forEach((e,i)=>{
+
+        let inputs = e.getElementsByTagName('input');
+
+        if(checkInvalidData(inputs[0].value) || checkInvalidData(inputs[1].value)){
+            document.getElementById('errorBoxGatesL').innerText = `Please fill valid data for ${e.id} `
+            flag2 = 1;
+            return;
+          }
+        else if(flag2 == 0){
+              document.getElementById('errorBoxGatesL').innerText = '';
+              gateDimensions[i] = {
+                id: e.id,
+                dimensions: [inputs[0].value, inputs[1].value]
+            }
+          }
+          
+
+       });
+
+       if(flag2 == 1){
+        flag2=0;
+        return;
+       }
+
+        flag2=0;
+
+       // data validation and collection for windows
+       let windowsDimensionList = document.getElementsByClassName('windows-dimensionsL');
+
+       let windowsDimensions = [];
+
+       Array.from(windowsDimensionList).forEach((e,i)=>{
+
+        let inputs = e.getElementsByTagName('input');
+
+        if(checkInvalidData(inputs[0].value) || checkInvalidData(inputs[1].value)){
+            document.getElementById('errorBoxWindowsL').innerText = `Please fill valid data for ${e.id} `;
+            flag2 = 1;
+            return;
+          }
+          else if(flag2 == 0){
+              document.getElementById('errorBoxWindowsL').innerText = '';
+              windowsDimensions[i] = {
+                id: e.id,
+                dimensions: [inputs[0].value, inputs[1].value]
+            }
+          }
+          
+
+       });
+
+       if(flag2 == 1){
+        flag2=0;
+        return;
+       }
+
+       let dataL = {
+        gatesLength: gateDimensions,
+        windowsLength: windowsDimensions
+       }
+
+       calculateLength(dataL);
+
+}
+
+//calculation functions
+function calculateLength(data){
+
+  function calculateParameterOfWindows(height,width){
+     return 2*(height+width);
+  }  
+  
+  function calculateParemeterOfGates(height,width){
+     return (2*height) + width;
+  }
+
+  let paremeterOfGates = [];
+let sumOfparametersOfGates = 0;
+data.gatesLength.forEach((e, i) => {
+    const h = Number(e.dimensions[0]);
+    const w = Number(e.dimensions[1]);
+    paremeterOfGates[i] = calculateParemeterOfGates(h, w);
+    sumOfparametersOfGates += paremeterOfGates[i];
+});
+
+let paremeterOfWindows = [];
+let sumOfparametersOfWindows = 0;
+data.windowsLength.forEach((e, i) => {
+    const h = Number(e.dimensions[0]);
+    const w = Number(e.dimensions[1]);
+    paremeterOfWindows[i] = calculateParameterOfWindows(h, w);
+    sumOfparametersOfWindows += paremeterOfWindows[i];
+});
+
+  let gates = {
+      paremeterOfGates: paremeterOfGates,
+      sumOfparametersOfGates: sumOfparametersOfGates
+  }
+
+  let windows = {
+      paremeterOfWindows: paremeterOfWindows,
+      sumOfparametersOfWindows: sumOfparametersOfWindows
+  }
+
+  let finalLengths = {
+      gates:gates,
+      windows:windows
+  }
+
+  paintSolutionWindow2(data,finalLengths);
+
+}
+
+function paintSolutionWindow2(data,finalLengths){
+
+    const snippetArea = document.getElementById('snippet-containerL');
+
+    const {gatesLength,windowsLength} = data;
+    const {gates,windows} = finalLengths;
+
+    let explanation = `# Length calculation report\n\n`;
+
+    explanation += `Dimensions of Gates:\n\nFormula used = 2*Height + Width\n\n`;
+
+    gatesLength.forEach((g,i) => {
+      const [h, w_] = g.dimensions;
+      explanation += `${g.id} : ${h} × ${w_}, Boundry Length = ${gates.paremeterOfGates[i]} units\n`;
+    });
+    explanation += `------------------------\n`;
+    explanation += `Total Boundry Length of Gates = ${gates.sumOfparametersOfGates} units\n`;
+    explanation += `------------------------\n\n`;
+  
+    explanation += `Dimensions of Windows:\n\nFormula used : 2*(Height + Width)\n\n`;
+    windowsLength.forEach((w,i) => {
+      const [h, w_] = w.dimensions;
+      explanation += `${w.id} : ${h} × ${w_}, Boundry Length = ${windows.paremeterOfWindows[i]} units\n`;
+    });
+    explanation += `------------------------\n`;
+    explanation += `Total Boundry Length of Windows = ${windows.sumOfparametersOfWindows} units\n`;
+    explanation += `------------------------\n\n`;
+
+    snippetArea.innerText = explanation;
+
+}
 
 function calculate(data){
 
@@ -436,9 +775,13 @@ function calculate(data){
        resultantArea: resultantArea
     }
 
+
     paintSolutionWindow(data,finalAreas)
 
 }
+
+
+
 function paintSolutionWindow(data, finalAreas) {
     
     document.getElementById('final-ans-container').innerHTML = finalAreas.resultantArea + ' ' +document.getElementById('unitDrop').value ;
@@ -502,12 +845,26 @@ function paintSolutionWindow(data, finalAreas) {
     explanation += `--------------------------------------`;
   
     snippetArea.innerHTML = `<pre>${explanation}</pre>`;
-  }
+}
+
+
   
 document.getElementById('copy1').addEventListener('click',(e)=>{
     e.target.innerText = 'Copied!';
 
     const snippetAreaText = document.getElementById('snippet-container').innerText;
+
+    navigator.clipboard.writeText(snippetAreaText);
+
+    setTimeout(()=>{
+      e.target.innerText = 'Copy';
+    },1000)
+});  
+
+document.getElementById('copy2').addEventListener('click',(e)=>{
+    e.target.innerText = 'Copied!';
+
+    const snippetAreaText = document.getElementById('snippet-containerL').innerText;
 
     navigator.clipboard.writeText(snippetAreaText);
 
